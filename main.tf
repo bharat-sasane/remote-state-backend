@@ -45,3 +45,13 @@ resource "aws_s3_bucket_lifecycle_configuration" "remote_state_lifecycle" {
     }
   }
 }
+
+ terraform {
+  backend "s3" {
+    bucket         = "your-terraform-state-bucket"
+    key            = "path/to/your/statefile.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "your-dynamodb-lock-table"  # Existing DynamoDB lock
+    encrypt        = true
+  }
+}
